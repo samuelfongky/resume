@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
     :root {
         --page-padding: 10mm;
@@ -275,57 +276,37 @@
 
     /* Responsive adjustments for small screens (mobile) */
     @media (max-width: 720px) {
-        :root {
-            --page-padding: 6mm;
-        }
+        :root { --page-padding: 6mm; }
+        /* Use px on small screens for predictable rendering */
         body {
-            font-size: 9pt; /* slightly smaller base on mobile for consistency */
+            font-size: 14px;
             padding: 8px;
         }
         /* Stack columns vertically for narrow viewports */
-        .main-table, .main-table tr {
-            display: block;
-            width: 100%;
+        .main-table, .main-table tr { display: block; width: 100%; }
+        .main-table td { display: block; width: 100%; box-sizing: border-box; padding: 0; }
+        .left-col, .right-col { width: 100%; padding: 0; border: none; }
+        .right-col { margin-top: 12px; }
+
+        /* Ensure sidebar and main content inherit the same base size */
+        .left-col, .right-col { font-size: inherit; }
+
+        /* Explicitly set sizes for key elements in the right column to match sidebar */
+        .left-col .item-title,
+        .right-col .exp-role,
+        .left-col .item-title {
+            font-size: 13px;
+            line-height: 1.2;
         }
-        .main-table td {
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-            padding: 0;
+        .left-col .item-subtitle,
+        .right-col .exp-company,
+        .right-col .exp-bullets,
+        .left-col .item-subtitle {
+            font-size: 12px;
         }
-        .left-col {
-            width: 100%;
-            padding-right: 0;
-            border-right: none;
-        }
-        .right-col {
-            width: 100%;
-            padding-left: 0;
-            border-left: none;
-            margin-top: 12px;
-        }
-        /* Harmonize font sizes between sidebar and main content */
-        .item-title {
-            font-size: 9pt;
-        }
-        .item-subtitle {
-            font-size: 8.3pt;
-        }
-        .exp-role {
-            font-size: 9pt;
-        }
-        .exp-date {
-            font-size: 8pt;
-            width: auto;
-            text-align: right;
-        }
-        .exp-bullets {
-            font-size: 8.3pt;
-        }
-        .section-title {
-            font-size: 10pt;
-            padding: 6px 8px;
-        }
+        .right-col .exp-date { font-size: 11px; width: auto; text-align: right; }
+
+        .section-title { font-size: 15px; padding: 6px 8px; }
         .skills-container { gap: 4px; }
         .page-footer { display: none; }
     }
