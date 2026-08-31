@@ -5,13 +5,30 @@
 <style>
     @page {
         size: A4;
-        margin: 5mm;
-        @bottom-right {
-            content: "Browse the certification via ";
-            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-            font-size: 7.5pt;
-            color: #a0aec0;
-        }
+        margin: 5mm 5mm 18mm 5mm;
+    }
+
+    .page-footer {
+        position: fixed;
+        right: 8mm;
+        bottom: 6mm;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        font-size: 7.5pt;
+        color: #a0aec0;
+        z-index: 10;
+    }
+
+    .page-footer .qr-code {
+        width: 32px;
+        height: 32px;
+        border: 1px solid #d9e2ec;
+        border-radius: 4px;
+        background: #fff;
+        object-fit: contain;
+        display: block;
     }
     
     *, *::before, *::after {
@@ -260,6 +277,10 @@
         }
         .right-col {
             padding-left: 10px;
+        }
+        .page-footer {
+            right: 6mm;
+            bottom: 5mm;
         }
     }
 </style>
@@ -587,6 +608,11 @@
         </td>
     </tr>
 </table>
+
+<div class="page-footer" aria-label="Certification QR code footer">
+    <span>Click the title to browse the certification via </span>
+    <img class="qr-code" src="certificate/QRcode.png" alt="QR code for certification" />
+</div>
 
 </body>
 </html>
