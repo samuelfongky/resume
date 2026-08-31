@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+    @page {
+        size: A4;
+        margin: 5mm;
+        @bottom-right {
+            content: "";
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-size: 7.5pt;
+            color: #a0aec0;
+        }
+    }
+    
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin: 0;
+        padding: 10mm;
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        color: #2d3748;
+        font-size: 9.2pt;
+        line-height: 1.45;
+        background-color: #ffffff;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    /* Elegant Clean Header */
+    .header {
+        text-align: left;
+        border-bottom: 2px solid #2b6cb0;
+        padding-bottom: 12px;
+        margin-bottom: 18px;
+    }
+    
+    .name {
+        font-size: 24pt;
+        font-weight: 800;
+        color: #1a365d;
+        letter-spacing: -0.5px;
+        margin: 0 0 4px 0;
+    }
+    
+    .credentials {
+        font-size: 9.5pt;
+        font-weight: 600;
+        color: #4a5568;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0 0 8px 0;
+    }
+    
+    .contact-item a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .contact-item a:hover {
+        color: #2b6cb0;
+        text-decoration: underline;
+    }
+    
+    .contact-item {
+        display: inline-block;
+        margin-right: 16px;
+    }
+    
+    .contact-item strong {
+        color: #4a5568;
+    }
+    
+    /* Layout Framework */
+    .main-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .left-col {
+        width: 31%;
+        vertical-align: top;
+        padding-right: 18px;
+    }
+    
+    .right-col {
+        width: 69%;
+        vertical-align: top;
+        padding-left: 18px;
+        border-left: 1px solid #e2e8f0;
+    }
+    
+    /* Modern Content Typography */
+    .section-title {
+        font-size: 10.5pt;
+        font-weight: 700;
+        color: #1a365d;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background-color: #ebf8ff;
+        padding: 4px 8px;
+        margin-top: 18px;
+        margin-bottom: 12px;
+        border-left: 3px solid #2b6cb0;
+        page-break-after: avoid;
+    }
+    
+    .right-col .section-title {
+        margin-top: 0;
+    }
+    
+    .right-col .section-title:not(:first-of-type) {
+        margin-top: 18px;
+    }
+    
+    .sidebar-block {
+        margin-bottom: 14px;
+        page-break-inside: avoid;
+    }
+    
+    .item-title {
+        font-weight: 700;
+        color: #2d3748;
+        font-size: 9pt;
+        margin-bottom: 2px;
+    }
+    
+    .item-subtitle {
+        font-size: 8.5pt;
+        color: #4a5568;
+        margin-bottom: 4px;
+    }
+    
+    .item-bullet-list {
+        margin: 0;
+        padding-left: 12px;
+        font-size: 8pt;
+        color: #4a5568;
+    }
+    
+    .item-bullet-list li {
+        margin-bottom: 2px;
+    }
+    
+    /* Skill pill design for premium feel */
+    .skills-container {
+        margin-top: 4px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .skill-pill {
+        display: inline-block;
+        background-color: #f7fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-size: 8pt;
+        color: #4a5568;
+        line-height: 1.3;
+    }
+    
+    /* Professional Experience Cards */
+    .exp-block {
+        margin-bottom: 14px;
+        page-break-inside: avoid;
+    }
+    
+    .exp-header-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 3px;
+    }
+    
+    .exp-role {
+        font-size: 10pt;
+        font-weight: 700;
+        color: #1a365d;
+        text-align: left;
+    }
+    
+    .exp-date {
+        font-size: 8.5pt;
+        color: #718096;
+        text-align: right;
+        font-weight: 600;
+        width: 110px;
+    }
+    
+    .exp-company {
+        font-size: 9pt;
+        font-weight: 600;
+        color: #2b6cb0;
+        margin-bottom: 6px;
+    }
+    
+    .exp-bullets {
+        margin: 0;
+        padding-left: 14px;
+        font-size: 8.8pt;
+        color: #4a5568;
+    }
+    
+    .exp-bullets li {
+        margin-bottom: 5px;
+        text-align: justify;
+    }
+    
+    .awards-list {
+        margin: 0;
+        padding-left: 14px;
+        font-size: 8.8pt;
+        color: #4a5568;
+    }
+    
+    .awards-list li {
+        margin-bottom: 4px;
+    }
+
+    /* Print-specific adjustments to control page breaks */
+    @media print {
+        body {
+            /* reduce padding slightly for printable area */
+            padding: 6mm;
+        }
+        .main-table {
+            table-layout: fixed;
+            width: 100%;
+        }
+        /* Force the first experience block to finish the first printed page */
+        .right-col .exp-block:first-of-type {
+            page-break-after: always;
+            break-after: page;
+        }
+        /* Reduce column side paddings to avoid accidental overflow */
+        .left-col {
+            padding-right: 10px;
+        }
+        .right-col {
+            padding-left: 10px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="name">Fong King Yui, Samuel</div>
+    <div class="credentials">MSc (ISM) &bull; BEng (FinTech) &bull; PMP &bull; AWS SAP &bull; AZ SAE &bull; Databricks DEP</div>
+    <div class="contact-info">
+        <span class="contact-item"><strong>Phone:</strong> <a href="tel:+85262386863">+852 62386863</a></span>
+        <span class="contact-item"><strong>Email:</strong> <a href="mailto:samuelfong5005@gmail.com">samuelfong5005@gmail.com</a></span>
+        <span class="contact-item"><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/samuelfongky" target="_blank" rel="noopener noreferrer">linkedin.com/in/samuelfongky</a></span>
+    </div>
+</div>
+
+<table class="main-table">
+    <tr>
+        <!-- LEFT SIDEBAR COLUMN -->
+        <td class="left-col">
+            
+            <div class="section-title" style="margin-top: 0;">Education</div>
+            
+            <div class="sidebar-block">
+                <div class="item-title">MSc in Information System Management</div>
+                <div class="item-subtitle">The Hong Kong University of Science and Technology</div>
+                <ul class="item-bullet-list">
+                    <li>Concentration in Technology Innovation & Entrepreneurship</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-block">
+                <div class="item-title">BEng in Financial Technology</div>
+                <div class="item-subtitle">The Chinese University of Hong Kong</div>
+                <ul class="item-bullet-list">
+                    <li>Second Class Upper Division</li>
+                    <li>Minor in Computer Science</li>
+                    <li>Minor in Data Analytics and Informatics</li>
+                </ul>
+            </div>
+            
+            <div class="section-title">Certifications</div>
+            
+            <!-- Professional certifications, newest first -->
+            <div class="sidebar-block">
+                <div class="item-title">Databricks Certified Data Engineer Professional</div>
+                <div class="item-subtitle">Databricks &bull; 2026</div>
+            </div>
+            <div class="sidebar-block">
+                <div class="item-title">Azure Solutions Architect Expert</div>
+                <div class="item-subtitle">Microsoft &bull; 2025</div>
+            </div>
+            <div class="sidebar-block">
+                <div class="item-title">Project Management Professional (PMP)</div>
+                <div class="item-subtitle">Project Management Institute &bull; 2024</div>
+            </div>
+            <div class="sidebar-block">
+                <div class="item-title">AWS Solutions Architect &ndash; Professional</div>
+                <div class="item-subtitle">AWS Certification &bull; 2024</div>
+            </div>
+            
+            <!-- Core certifications, newest first -->
+            <div class="sidebar-block">
+                <div class="item-title">Azure Administrator Associate</div>
+                <div class="item-subtitle">Microsoft &bull; 2025</div>
+            </div>
+            <div class="sidebar-block">
+                <div class="item-title">Databricks Generative AI Fundamentals</div>
+                <div class="item-subtitle">Databricks &bull; 2024</div>
+            </div>
+
+            <div class="sidebar-block">
+                <div class="item-title">Alteryx Designer Advanced</div>
+                <div class="item-subtitle">Alteryx &bull; 2024</div>
+            </div>
+            <div class="sidebar-block">
+                <div class="item-title">Server Implementation</div>
+                <div class="item-subtitle">Alteryx &bull; 2024</div>
+            </div>
+            <div class="sidebar-block">
+                <div class="item-title">Server Administration</div>
+                <div class="item-subtitle">Alteryx &bull; 2024</div>
+            </div>
+            <div class="sidebar-block">
+                <div class="item-title">Google Certified Educator</div>
+                <div class="item-subtitle">Google &bull; 2026</div>
+            </div>
+
+            <div class="section-title">Honors & Awards</div>
+            <ul class="awards-list">
+                <li>Targeted Taught Postgraduate Programmes Fellowships (UGC)</li>
+                <li>Concord Fortune Ming Tak Scholarship</li>
+                <li>Children Charity Foundation Charity Scholarship</li>
+                <li>Woo Fung Miu Ling Scholarship</li>
+                <li>The TOYPA 2018 Future Leader Award</li>
+            </ul>
+
+            <div class="section-title">Technical Skills</div>
+            
+            <div class="sidebar-block">
+                <div class="item-title" style="text-transform: uppercase; color: #4a5568; font-size: 8pt; letter-spacing: 0.5px;">Programming</div>
+                <div class="skills-container">
+                    <span class="skill-pill">Python</span>
+                    <span class="skill-pill">SQL</span>
+                    <span class="skill-pill">Go</span>
+                    <span class="skill-pill">SAS</span>
+                    <span class="skill-pill">C</span>
+                    <span class="skill-pill">R</span>
+                    <span class="skill-pill">C#</span>
+                    <span class="skill-pill">JavaScript</span>
+                    <span class="skill-pill">HTML/CSS</span>
+                    <span class="skill-pill">Swift</span>
+                    <span class="skill-pill">MATLAB</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-block">
+                <div class="item-title" style="text-transform: uppercase; color: #4a5568; font-size: 8pt; letter-spacing: 0.5px;">Cloud & Platforms</div>
+                <div class="skills-container">
+                    <span class="skill-pill">AWS</span>
+                    <span class="skill-pill">Azure</span>
+                    <span class="skill-pill">Databricks</span>
+                    <span class="skill-pill">GCP</span>
+                    <span class="skill-pill">MS Fabric</span>
+                    <span class="skill-pill">GitHub</span>
+                    <span class="skill-pill">Jira</span>
+                    <span class="skill-pill">Cloudera</span>
+                    <span class="skill-pill">SSMS</span>
+                    <span class="skill-pill">MongoDB</span>
+                    <span class="skill-pill">Alibaba Cloud</span>
+                    <span class="skill-pill">Postman</span>
+                    <span class="skill-pill">MySQL</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-block">
+                <div class="item-title" style="text-transform: uppercase; color: #4a5568; font-size: 8pt; letter-spacing: 0.5px;">Data & ML Tools</div>
+                <div class="skills-container">
+                    <span class="skill-pill">Alteryx</span>
+                    <span class="skill-pill">Qlik Sense</span>
+                    <span class="skill-pill">QlikView</span>
+                    <span class="skill-pill">Tableau</span>
+                    <span class="skill-pill">Power BI</span>
+                    <span class="skill-pill">TensorFlow</span>
+                    <span class="skill-pill">Core ML</span>
+                    <span class="skill-pill">YOLO</span>
+                </div>
+            </div>
+            
+
+            
+        </td>
+        
+        <!-- RIGHT MAIN CONTENT COLUMN -->
+        <td class="right-col">
+            
+            <div class="section-title">Relevant Working Experience</div>
+            
+            <!-- Job 1 -->
+            <div class="exp-block">
+                <table class="exp-header-table">
+                    <tr>
+                        <td class="exp-role">Global Management Associate</td>
+                        <td class="exp-date">2025/07 - Present</td>
+                    </tr>
+                    <tr>
+                        <td class="exp-role">Consultant (Data Engineer & Analyst)</td>
+                        <td class="exp-date">2023/07 - Present</td>
+                    </tr>
+                </table>
+                <div class="exp-company">NCS Group (Full-Time)</div>
+                <div class="exp-role-detail">
+                    <ul class="exp-bullets">
+                        <li><strong>Global program delivery:</strong> Represented the firm across 3 global deployments, leading 10+ executive workshops and product showcases to drive platform buy-in among 500+ business stakeholders.</li>
+                        <li><strong>Enterprise AI Platform Delivery:</strong> Engaged in full-lifecycle development of an internal-facing AI platform tailored for data engineering teams, streamlining routine analytics tasks and optimizing cross-team productivity.</li>
+                        <li><strong>Data modernization:</strong> Delivered cloud and on-premise solutions for banking, luxury retail, jewellery, public sector and conglomerate clients using AWS, Azure, Databricks, Google Cloud, Cloudera and Microsoft Fabric.</li>
+                        <li><strong>Analytics and reporting:</strong> Built end-to-end pipelines, automated reporting and dashboards with Python, SQL, R, SAS, Go, C#, Alteryx, Qlik, Power BI and Superset.</li>
+                    </ul>
+                </div>
+                <br>
+                <div class="exp-role-detail">
+                    <div class="item-title" style="font-weight: 700;"><em>Selected client engagements</em></div>
+                    <ul class="exp-bullets">
+                        <li><em>Public corporation | Apr 2026 – Present</em>: Engineered 3 Databricks data architectures on Azure with end-to-end DEV-UAT-PROD CI/CD pipelines, leveraging PySpark and SQL to standardize 100+ datasets for HK-wide decision-making.</li>
+                        <li><em>Global banking & financial services provider | Jan 2026 – Apr 2026</em>: Led end-to-end analytics delivery for credit risk monitoring, designing and modernizing 5+ Python ETL scripts and deploying 10+ high-reliability Power BI and Qlik Sense dashboards. </li>
+                        <li><em>Global banking & financial services provider | Jul 2025 – Jan 2026</em>: Architected 50+ production-grade PySpark ETL scripts in Cloudera, establishing robust CI/CD deployment practices across DEV-UAT-PROD and collaborating directly with banking business leads to refine analytical use cases.</li>
+                        <li><em>Multinational conglomerate | Apr 2025 – Jul 2025</em>: Replaced 100+ manual Excel reports with 20+ automated Power BI dashboards, leveraging Alteryx for streamlined data prep and establishing scaled analytics governance across business units.</li>
+                        <li><em>Global banking & financial services provider | Mar 2025 – Apr 2025</em>: Migrated 5+ legacy SAS financial workflows to Python, cutting execution runtime by 70% and fortifying batch processing stability.</li>
+                        <li><em>Large jewellery company | Jan 2025 – Mar 2025</em>: Engineered the migration of an on-premise legacy data warehouse to Microsoft Fabric, automating PySpark pipelines and implementing DataOps CI/CD practices.</li>
+                        <li><em>Public corporation | Sep 2024 – Jan 2025</em>: Scaled an enterprise CKAN data platform and built automated GCP integrations to centralize 100+ dataset discovery, and enforce cloud data access controls.</li>
+                        <li><em>Global banking & financial services provider | May 2024 – Sep 2024</em>: Built 40+ scalable AWS data models with automated validation protocols, ensuring 100% data accuracy and zero downstream processing errors across business units.</li>
+                        <li><em>Luxury retail company | Jul 2023 – May 2024</em>: Delivered 10+ QlikView dashboards with 15x faster loading speeds via optimized SQL data modeling in Azure, SSMS and Alteryx, while orchestrating 5+ CRM migrations to unify cross-functional reporting.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Job 2 -->
+            <div class="exp-block">
+                <table class="exp-header-table">
+                    <tr>
+                        <td class="exp-role">Website & Mobile Application Developer</td>
+                        <td class="exp-date">2023/06 - 2023/11</td>
+                    </tr>
+                </table>
+                <div class="exp-company">The Chinese University of Hong Kong (Freelance)</div>
+                <div class="exp-role-detail">
+                    <ul class="exp-bullets">
+                    <li>Directed full-lifecycle development for web-based mobile applications, successfully delivering 4 standalone projects within budget and schedule.</li>
+                    <li>Enforced rigorous code reviews and quality control frameworks to optimize software performance and responsiveness.</li>
+                </ul>
+            </div>
+            
+            <!-- Job 3 -->
+            <div class="exp-block">
+                <table class="exp-header-table">
+                    <tr>
+                        <td class="exp-role">Technical Project Assistant</td>
+                        <td class="exp-date">2020/01 - 2023/05</td>
+                    </tr>
+                </table>
+                <div class="exp-company">The Chinese University of Hong Kong (Part-Time)</div>
+                <ul class="exp-bullets">
+                    <li>Supervised and coordinated the delivery of over 50 technical projects spanning AI & Machine Learning implementations, cloud environments, application platforms, and advanced data visualization.</li>
+                </ul>
+            </div>
+            
+            <!-- Job 4 -->
+            <div class="exp-block">
+                <table class="exp-header-table">
+                    <tr>
+                        <td class="exp-role">Solutions Consultant Intern</td>
+                        <td class="exp-date">2022/06 - 2022/08</td>
+                    </tr>
+                </table>
+                <div class="exp-company">HKT Limited (Internship)</div>
+                <ul class="exp-bullets">
+                    <li>Collaborated on 15+ comprehensive technical and commercial projects, partnering with over 30 external clients to align cloud and business strategy.</li>
+                </ul>
+            </div>
+            
+            <!-- Job 5 -->
+            <div class="exp-block">
+                <table class="exp-header-table">
+                    <tr>
+                        <td class="exp-role">Business Analyst Programmer Intern</td>
+                        <td class="exp-date">2021/07 - 2021/08</td>
+                    </tr>
+                </table>
+                <div class="exp-company">China Tonghai International Financial Limited (Internship)</div>
+                <ul class="exp-bullets">
+                    <li>Assisted with securities and equity trading platform development, enhancing backend system logic using C# and Python, and supporting rigorous User Acceptance Testing (UAT).</li>
+                </ul>
+            </div>
+
+            <!-- Job 6/7 -->
+            <div class="exp-block">
+                <table class="exp-header-table">
+                    <tr>
+                        <td class="exp-role">Data Science & Software Engineering Internships</td>
+                        <td class="exp-date">2020/07 - 2021/01</td>
+                    </tr>
+                </table>
+                <div class="exp-company">Inclusive Business Lab & MotoNerv Limited</div>
+                <ul class="exp-bullets">
+                    <li><strong>Inclusive Business Lab:</strong> Engineered full-stack web architectures using Node.js, handled cloud environment setup on AWS, and deployed feature tracking alongside analytical data dashboards.</li>
+                    <li><strong>MotoNerv Limited:</strong> Supported mobile product roadmaps by building cross-platform applications across iOS and Android, integrating backend architectures with Azure database deployments.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">Other Working Experience</div>
+
+            <!-- Job 8 -->
+            <!-- Freelance Technical Tutor & STEAM Educator -->
+            <div class="exp-block">
+                <table class="exp-header-table">
+                    <tr>
+                        <td class="exp-role">Technical Tutor & Educator</td>
+                        <td class="exp-date">2020/01 - Present</td>
+                    </tr>
+                </table>
+                <div class="exp-company">Self-Employed (Freelance)</div>
+                <ul class="exp-bullets">
+                    <li><strong>University & Adult technical coaching:</strong> Mentored university students and led adult upskilling cohorts on AI, FinTech, Python, SQL, and data governance through hands-on project building, data modeling, and code reviews.</li>
+                    <li><strong>Primary & Secondary STEAM curriculum:</strong> Designed and delivered interactive courses across secondary and primary schools, introducing Python, block-based programming, and other STEAM related sectors to build computational thinking.</li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
