@@ -291,20 +291,21 @@
         /* Ensure sidebar and main content inherit the same base size */
         .left-col, .right-col { font-size: inherit; }
 
-        /* Explicitly set sizes for key elements in the right column to match sidebar */
+        /* Normalize heading and body sizes between columns on small screens */
         .left-col .item-title,
         .right-col .exp-role,
-        .left-col .item-title {
-            font-size: 13px;
-            line-height: 1.2;
+        .exp-company {
+            font-size: 14px;
+            line-height: 1.25;
         }
         .left-col .item-subtitle,
-        .right-col .exp-company,
         .right-col .exp-bullets,
-        .left-col .item-subtitle {
-            font-size: 12px;
+        .item-bullet-list,
+        .exp-date {
+            font-size: 13px;
+            line-height: 1.3;
         }
-        .right-col .exp-date { font-size: 11px; width: auto; text-align: right; }
+        .right-col .exp-date { width: auto; text-align: right; }
 
         .section-title { font-size: 15px; padding: 6px 8px; }
         .skills-container { gap: 4px; }
