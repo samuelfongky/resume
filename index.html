@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <style>
+    :root {
+        --page-padding: 10mm;
+    }
     @page {
         size: A4;
         margin: 5mm;
-        @bottom-right {
-            content: "Check the certification by clicking the title via https://samuelfongky.github.io/resume/";
-            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-            font-size: 7.5pt;
-            color: #a0aec0;
-        }
     }
     
     *, *::before, *::after {
@@ -20,7 +17,7 @@
     
     body {
         margin: 0;
-        padding: 10mm;
+        padding: var(--page-padding);
         font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
         color: #2d3748;
         font-size: 9.2pt;
@@ -243,7 +240,8 @@
     @media print {
         body {
             /* reduce padding slightly for printable area */
-            padding: 6mm;
+            --page-padding: 6mm;
+            padding: var(--page-padding);
         }
         .main-table {
             table-layout: fixed;
@@ -261,6 +259,75 @@
         .right-col {
             padding-left: 10px;
         }
+    }
+
+    /* Fixed page footer that aligns with body padding (right edge) */
+    .page-footer {
+        position: fixed;
+        right: var(--page-padding); /* matches body padding to align with content */
+        bottom: 1mm;
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        font-size: 7.5pt;
+        color: #757575;
+        text-align: right;
+        z-index: 9999;
+    }
+
+    /* Responsive adjustments for small screens (mobile) */
+    @media (max-width: 720px) {
+        :root {
+            --page-padding: 6mm;
+        }
+        body {
+            font-size: 9pt; /* slightly smaller base on mobile for consistency */
+            padding: 8px;
+        }
+        /* Stack columns vertically for narrow viewports */
+        .main-table, .main-table tr {
+            display: block;
+            width: 100%;
+        }
+        .main-table td {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0;
+        }
+        .left-col {
+            width: 100%;
+            padding-right: 0;
+            border-right: none;
+        }
+        .right-col {
+            width: 100%;
+            padding-left: 0;
+            border-left: none;
+            margin-top: 12px;
+        }
+        /* Harmonize font sizes between sidebar and main content */
+        .item-title {
+            font-size: 9pt;
+        }
+        .item-subtitle {
+            font-size: 8.3pt;
+        }
+        .exp-role {
+            font-size: 9pt;
+        }
+        .exp-date {
+            font-size: 8pt;
+            width: auto;
+            text-align: right;
+        }
+        .exp-bullets {
+            font-size: 8.3pt;
+        }
+        .section-title {
+            font-size: 10pt;
+            padding: 6px 8px;
+        }
+        .skills-container { gap: 4px; }
+        .page-footer { display: none; }
     }
 </style>
 </head>
@@ -587,6 +654,8 @@
         </td>
     </tr>
 </table>
+
+<div class="page-footer">Check the certification by clicking the title via https://samuelfongky.github.io/resume/</div>
 
 </body>
 </html>
